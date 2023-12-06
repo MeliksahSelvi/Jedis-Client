@@ -1,5 +1,8 @@
 package com.melik.redis.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.melik.redis.model.Programmer;
 import com.melik.redis.repo.StringRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +21,9 @@ public class StringServiceImpl implements StringService {
     }
 
     @Override
-    public void setProgrammer(String idKey, String programmer) {
-        repository.setProgrammer(idKey, programmer);
+    public void setProgrammer(Programmer programmer) throws JsonProcessingException {
+        ObjectMapper objectMapper=new ObjectMapper();
+        repository.setProgrammer(String.valueOf(programmer.getId()), objectMapper.writeValueAsString(programmer));
     }
 
     @Override
