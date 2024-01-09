@@ -1,5 +1,6 @@
 package com.melik.redis.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.melik.redis.model.Programmer;
 import com.melik.redis.service.StringService;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class StringController {
     }
 
     @PostMapping
-    public ResponseEntity save(@RequestBody Programmer programmer) {
+    public ResponseEntity save(@RequestBody Programmer programmer) throws JsonProcessingException {
         stringService.setProgrammer(programmer);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
